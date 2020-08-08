@@ -3,6 +3,8 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"node_topology_discovery/config_loader"
+	"node_topology_discovery/constants"
 )
 
 func main() {
@@ -12,5 +14,12 @@ func main() {
 		context.String(http.StatusOK, "server is live..")
 	})
 
-	r.Run(":8080")
+	configLoader := config_loader.NewConfigLoader()
+	configData, loadError := configLoader.Load(constants.CONFIG_FILE_PATH)
+
+	if loadError != nil {
+		panic("Cannot load config: " + loadError.Error())
+	}
+
+	r.Run(":" + configData.Port)
 }
