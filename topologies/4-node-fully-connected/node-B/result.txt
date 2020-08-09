@@ -1,0 +1,8 @@
+FINAL RESULT:
+A: [B, C, D]
+B: [A, C, D]
+C: [A, B, D]
+D: [A, B, C]
+
+
+EXECUTION TIME: 0.005722 seconds
