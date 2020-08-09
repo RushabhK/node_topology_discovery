@@ -29,12 +29,10 @@ func (suite ConfigLoaderTestSuite) TestShouldLoadConfigFromFile() {
 		Port:      "3201",
 		Neighbors: []Neighbor{
 			{
-				Name:      "machine-2",
 				IpAddress: "localhost",
 				Port:      "3202",
 			},
 			{
-				Name:      "machine-3",
 				IpAddress: "localhost",
 				Port:      "3203",
 			},

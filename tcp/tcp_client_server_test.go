@@ -44,8 +44,8 @@ func (suite TcpClientServerTestSuite) TestShouldServeOneRequestAndStopTheServerW
 			IpAddress: "localhost",
 			Port:      "30001",
 			Neighbors: []model.NeighborInfo{
-				{Port: "30002", IpAddress: "localhost", Name: "machine-2"},
-				{Port: "30003", IpAddress: "localhost", Name: "machine-3"},
+				{Port: "30002", IpAddress: "localhost"},
+				{Port: "30003", IpAddress: "localhost"},
 			}},
 	}
 

@@ -10,7 +10,6 @@ type NodeInfo struct {
 }
 
 type NeighborInfo struct {
-	Name      string `json:"name"`
 	IpAddress string `json:"ip_address"`
 	Port      string `json:"port"`
 }

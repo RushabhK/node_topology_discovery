@@ -4,12 +4,10 @@
   "port": "3201",
   "neighbors": [
     {
-      "name": "machine-2",
       "ip_address": "localhost",
       "port": "3202"
     },
     {
-      "name": "machine-3",
       "ip_address": "localhost",
       "port": "3203"
     }
