@@ -24,3 +24,10 @@ func (response NodesDiscoveryResponse) ToString() string {
 	bytes, _ := json.Marshal(response)
 	return string(bytes)
 }
+
+func (response1 NodesDiscoveryResponse) Union(response2 NodesDiscoveryResponse) NodesDiscoveryResponse {
+	for k, v := range response2 {
+		response1[k] = v
+	}
+	return response1
+}

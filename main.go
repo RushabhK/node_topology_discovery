@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"node_topology_discovery/client"
 	"node_topology_discovery/config_loader"
 	"node_topology_discovery/constants"
 	"node_topology_discovery/model"
@@ -18,7 +19,8 @@ func main() {
 		panic("Cannot load config: " + loadError.Error())
 	}
 
-	discoveryService := service.NewNodesDiscoveryService(configData)
+	udpClient := client.NewUdpClient(constants.CLIENT_DIAL_TIMEOUT, configData.IpAddress, configData.Port)
+	discoveryService := service.NewNodesDiscoveryService(configData, udpClient)
 	server := server.NewUdpServer(discoveryService)
 
 	var wg sync.WaitGroup
@@ -63,4 +65,4 @@ Req to B is { VisitedNodes -> [A,E] }: Response from E is : {E: [A]}
 	E : [A],
 	A : [E, C, B]
 }
- */
+*/
