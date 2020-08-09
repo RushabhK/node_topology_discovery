@@ -12,3 +12,11 @@ type Neighbor struct {
 	IpAddress string `json:"ip_address"`
 	Port      string `json:"port"`
 }
+
+func (configData ConfigData) GetIdentifier() string {
+	return configData.IpAddress + ":" + configData.Port
+}
+
+func (neighbor Neighbor) GetIdentifier() string {
+	return neighbor.IpAddress + ":" + neighbor.Port
+}
