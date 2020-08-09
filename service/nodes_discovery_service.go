@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"node_topology_discovery/client"
 	"node_topology_discovery/config_loader"
 	"node_topology_discovery/model"
@@ -23,6 +24,8 @@ func NewNodesDiscoveryService(configData config_loader.ConfigData, clientFactory
 }
 
 func (service nodesDiscoveryService) Discover(request model.NodesDiscoveryRequest) (model.NodesDiscoveryResponse, error) {
+	request.DebugTrace += service.configData.Name + " -> "
+	fmt.Println("Discovering the machines in path: ", request.DebugTrace)
 	aggregatedResponse := model.NodesDiscoveryResponse{}
 	aggregatedResponse[service.configData.GetIdentifier()] = service.configData.ToNodeInfo()
 	request.UpdateVisitedNodes(aggregatedResponse)
@@ -30,6 +33,7 @@ func (service nodesDiscoveryService) Discover(request model.NodesDiscoveryReques
 		if !visited(neighbor, request.VisitedNodes) {
 			discoveryResponse, err := service.client.MakeRequest(neighbor.IpAddress, neighbor.Port, request)
 			if err != nil {
+				fmt.Println("Error while discovering: ", err.Error())
 				return model.NodesDiscoveryResponse{}, err
 			}
 			request.UpdateVisitedNodes(discoveryResponse)
