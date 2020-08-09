@@ -29,7 +29,7 @@ func NewUdpClient(timeoutInSeconds time.Duration, ipAddress, port string) Client
 
 func (udpClient udpClient) MakeRequest(request model.NodesDiscoveryRequest) (model.NodesDiscoveryResponse, error) {
 	addressString := udpClient.ipAddress + ":" + udpClient.port
-	println("Dialing udp")
+	fmt.Println("Dialing udp..")
 	udpConnection, err := net.Dial("udp", addressString)
 
 	if err != nil {
@@ -39,17 +39,30 @@ func (udpClient udpClient) MakeRequest(request model.NodesDiscoveryRequest) (mod
 	defer udpConnection.Close()
 
 	requestBytes, _ := json.Marshal(request)
-	//requestString := string(requestBytes)
-	udpConnection.Write(requestBytes)
-	//fmt.Fprintf(udpConnection, requestString + "\n")
+	fmt.Println("Writing to UDP connection : ", string(requestBytes))
+	_, writeErr := udpConnection.Write(requestBytes)
+	if writeErr != nil {
+		fmt.Println("Error while writing : ", writeErr.Error())
+		return model.NodesDiscoveryResponse{}, writeErr
+	}
+	fmt.Println("Write successful!")
 
-	p := make([]byte, 2048)
-	readLen, err := bufio.NewReader(udpConnection).Read(p)
+	responseBytes := make([]byte, 2048)
+	
+	fmt.Println("Reading response from udp server... ")
+	readLen, err := bufio.NewReader(udpConnection).Read(responseBytes)
 	if err != nil {
+		fmt.Println("Error while reading response from udp server : ", err.Error())
 		return model.NodesDiscoveryResponse{}, err
 	}
+	fmt.Println("Response from udp server : ", string(responseBytes))
 	var response model.NodesDiscoveryResponse
-	unmarshalErr := json.Unmarshal(p[:readLen], &response)
-
-	return response, unmarshalErr
+	fmt.Println("Deserializing the response..")
+	unmarshalErr := json.Unmarshal(responseBytes[:readLen], &response)
+	if unmarshalErr != nil {
+		fmt.Println("Error while deserilizing the response : ", unmarshalErr.Error())
+		return response, unmarshalErr
+	}
+	fmt.Println("Deserialization of response done successfully")
+	return response, nil
 }

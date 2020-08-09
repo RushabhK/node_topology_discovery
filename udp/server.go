@@ -36,6 +36,7 @@ func (server udpServer) Serve(port string, nodesCount chan int, wg *sync.WaitGro
 		Port: portInt,
 		IP:   net.ParseIP("localhost"),
 	}
+	fmt.Println("Listening to udp..")
 	udpServer, listenError := net.ListenUDP("udp", &addr)
 	if listenError != nil {
 		fmt.Println("Error while listening : ", listenError.Error())
@@ -46,41 +47,49 @@ func (server udpServer) Serve(port string, nodesCount chan int, wg *sync.WaitGro
 	for {
 		if len(nodesCount) > 0 {
 			server.totalNodesCount = <-nodesCount
+			fmt.Println("Total nodes in the topology : ", server.totalNodesCount)
 		}
 		if server.totalNodesCount != 0 && server.requestsServed == server.totalNodesCount-1 {
+			fmt.Println("Processing of the server is completed.")
 			return nil
 		}
 
-		println("Reading request in server")
+		fmt.Println("Reading request from the client")
 		readLen, remoteaddr, err := udpServer.ReadFromUDP(requestBytes)
 		if err != nil {
+			fmt.Println("Error while reading the request : ", err.Error())
 			return err
 		}
-		requestString := string(requestBytes)
-		println("Request from client: ", requestString)
-		println("Remote address: ", remoteaddr)
+		fmt.Println("Request from client: ", string(requestBytes))
+		fmt.Println("Remote address: ", remoteaddr)
 
+		fmt.Println("Unmarshalling the request..")
 		var request model.NodesDiscoveryRequest
 		unmarshalErr := json.Unmarshal(requestBytes[0:readLen], &request)
 		if unmarshalErr != nil {
-			serveError = unmarshalErr
 			println("Unmarshalling error : ", unmarshalErr.Error())
+			serveError = unmarshalErr
 			return
 		}
 
-
-		fmt.Println("Request received : ", request.ToString())
+		fmt.Println("Request unmarshalling successful : ", request.ToString())
 
 		if len(request.VisitedNodes) > 0 {
+			fmt.Println("Valid request")
 			discoveryResponse, responseErr := server.service.Discover(request)
 			if responseErr != nil {
+				fmt.Println("Error while discovering ", responseErr.Error())
 				serveError = responseErr
 				return
 			}
 			server.requestsServed += 1
 			responseString := discoveryResponse.ToString() + "\n"
-			fmt.Println("Response : ", responseString)
-			udpServer.WriteToUDP([]byte(responseString), remoteaddr)
+			fmt.Println("Response from discovery : ", responseString)
+			fmt.Println("Writing the discovery response..")
+			_, writeError := udpServer.WriteToUDP([]byte(responseString), remoteaddr)
+			if writeError != nil {
+				fmt.Println("Error while writing the response from the server : ", writeError.Error())
+			}
 		}
 	}
 }
