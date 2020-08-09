@@ -32,7 +32,6 @@ func NewResultGenerator(service service.NodesDiscoveryService, fileUtils utils.F
 func (resultGenerator resultGenerator) Generate(nodesCount chan int, wg *sync.WaitGroup) error {
 	defer func() {
 		wg.Done()
-		close(nodesCount)
 	}()
 
 	var finalResult string
