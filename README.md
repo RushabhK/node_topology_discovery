@@ -28,3 +28,7 @@ Implementation of Network Topology Discovery.
     * Request for all the nodes the neighbor can discover other than the already visited ones
     * Add all the nodes from response to the visited nodes
 * Accumulate the responses and send it to the requested machine
+
+# Execution Steps
+- make build
+- make start
