@@ -36,28 +36,3 @@ func main() {
 
 	wg.Wait()
 }
-
-/*
-E - A - B
-	|   |
-F - C - D
-
-1. Tcp Server running on A
-	- ReqCount = 0
-
-2. Discovery service -> Discover all nodes in topology
-	- 2nd goroutine
-	- { VisitedNodes -> [A] }
-
-Req to E is { VisitedNodes -> [A] }: Response from E is : {E: [A]}
-Req to B is { VisitedNodes -> [A,E] }: Response from E is : {E: [A]}
-
-	- Response:
-{
-	B : [A, D],
-	C : [A, D],
-	D : [C, B],
-	E : [A],
-	A : [E, C, B]
-}
-*/
