@@ -2,7 +2,6 @@
 package result_generator
 
 import (
-	"encoding/json"
 	"fmt"
 	"node_topology_discovery/constants"
 	"node_topology_discovery/model"
@@ -40,7 +39,7 @@ func (resultGenerator resultGenerator) Generate(nodesCount chan int, wg *sync.Wa
 	defer func() {
 		fmt.Println("FINAL RESULT: ", finalResult)
 		fmt.Println("EXECUTION TIME: ", executionTime)
-		fileContent := "FINAL RESULT: \n" + finalResult + "\n\nEXECUTION TIME: " + fmt.Sprintf("%f seconds\n", executionTime)
+		fileContent := finalResult + "\n\nEXECUTION TIME: " + fmt.Sprintf("%f seconds\n", executionTime)
 		resultGenerator.fileUtils.Write(constants.RESULT_FILE_PATH, fileContent)
 	}()
 
@@ -73,9 +72,27 @@ func (resultGenerator resultGenerator) Generate(nodesCount chan int, wg *sync.Wa
 		sort.Strings(resultMap[machine])
 	}
 
-	bytes, _ := json.Marshal(resultMap)
-	finalResult = string(bytes)
+	finalResult = formatContent(resultMap, executionTime)
 	fmt.Println("Writing to NODES_COUNT CHANNEL value : ", len(resultMap))
 	nodesCount <- len(resultMap)
 	return nil
+}
+
+func formatContent(resultMap map[string][]string, executionTime float64) string {
+	result := "FINAL RESULT:\n"
+	keys := make([]string, 0, len(resultMap))
+	for k := range resultMap {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+
+	for _, k := range keys {
+		result += fmt.Sprintf("%s: [", k)
+		v := resultMap[k]
+		for _, n := range v {
+			result += n + ", "
+		}
+		result = result[:len(result)-2] + "]\n"
+	}
+	return result
 }
