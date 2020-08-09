@@ -5,5 +5,5 @@ import (
 )
 
 type Client interface {
-	MakeRequest(request model.NodesDiscoveryRequest) (model.NodesDiscoveryResponse, error)
+	MakeRequest(ipAddress string, port string, request model.NodesDiscoveryRequest) (model.NodesDiscoveryResponse, error)
 }

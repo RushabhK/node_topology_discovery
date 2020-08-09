@@ -28,7 +28,7 @@ func (service nodesDiscoveryService) Discover(request model.NodesDiscoveryReques
 	request.UpdateVisitedNodes(aggregatedResponse)
 	for _, neighbor := range service.configData.Neighbors {
 		if !visited(neighbor, request.VisitedNodes) {
-			discoveryResponse, err := service.client.MakeRequest(request)
+			discoveryResponse, err := service.client.MakeRequest(neighbor.IpAddress, neighbor.Port, request)
 			if err != nil {
 				return model.NodesDiscoveryResponse{}, err
 			}

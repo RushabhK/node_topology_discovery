@@ -34,7 +34,7 @@ func (suite UdpServerTestSuite) TestShouldServeOneRequestAndStopTheServerWhenNod
 	server := NewUdpServer(suite.discoveryService)
 	port := "30001"
 	go server.Serve(port, nodesCount, &wg)
-	client := client.NewUdpClient(5, "localhost", port)
+	client := client.NewUdpClient(5)
 	request := model.NodesDiscoveryRequest{
 		VisitedNodes: []string{"localhost:30001"},
 		DebugTrace:   "machine-1",
@@ -52,7 +52,7 @@ func (suite UdpServerTestSuite) TestShouldServeOneRequestAndStopTheServerWhenNod
 
 	suite.discoveryService.EXPECT().Discover(request).Return(expectedResponse, nil)
 
-	response, err := client.MakeRequest(request)
+	response, err := client.MakeRequest("localhost", port, request)
 
 	wg.Wait()
 	suite.Nil(err)
@@ -68,7 +68,7 @@ func (suite UdpServerTestSuite) TestShouldServeTwoRequestsAndStopTheServerWhenNo
 	server := NewUdpServer(suite.discoveryService)
 	port := "30002"
 	go server.Serve(port, nodesCount, &wg)
-	client := client.NewUdpClient(500, "localhost", port)
+	client := client.NewUdpClient(5)
 
 	request1 := model.NodesDiscoveryRequest{
 		VisitedNodes: []string{"localhost:30001"},
@@ -87,7 +87,7 @@ func (suite UdpServerTestSuite) TestShouldServeTwoRequestsAndStopTheServerWhenNo
 
 	suite.discoveryService.EXPECT().Discover(request1).Return(expectedResponse1, nil)
 
-	response1, err1 := client.MakeRequest(request1)
+	response1, err1 := client.MakeRequest("localhost", port, request1)
 	suite.Nil(err1)
 	suite.Equal(expectedResponse1, response1)
 
@@ -109,7 +109,7 @@ func (suite UdpServerTestSuite) TestShouldServeTwoRequestsAndStopTheServerWhenNo
 
 	suite.discoveryService.EXPECT().Discover(request2).Return(expectedResponse2, nil)
 
-	response2, err2 := client.MakeRequest(request2)
+	response2, err2 := client.MakeRequest("localhost", port, request2)
 
 	suite.Nil(err2)
 	suite.Equal(expectedResponse2, response2)

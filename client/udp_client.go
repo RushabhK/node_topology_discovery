@@ -11,20 +11,16 @@ import (
 
 type udpClient struct {
 	timeoutInSeconds time.Duration
-	ipAddress        string
-	port             string
 }
 
-func NewUdpClient(timeoutInSeconds time.Duration, ipAddress, port string) Client {
+func NewUdpClient(timeoutInSeconds time.Duration) Client {
 	return udpClient{
 		timeoutInSeconds: timeoutInSeconds,
-		port:             port,
-		ipAddress:        ipAddress,
 	}
 }
 
-func (udpClient udpClient) MakeRequest(request model.NodesDiscoveryRequest) (model.NodesDiscoveryResponse, error) {
-	addressString := udpClient.ipAddress + ":" + udpClient.port
+func (udpClient udpClient) MakeRequest(ipAddress string, port string, request model.NodesDiscoveryRequest) (model.NodesDiscoveryResponse, error) {
+	addressString := ipAddress + ":" + port
 	fmt.Println("Dialing udp..")
 	dialer := net.Dialer{Timeout: udpClient.timeoutInSeconds * time.Second}
 	udpConnection, err := dialer.Dial("udp", addressString)
