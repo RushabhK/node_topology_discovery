@@ -1,4 +1,4 @@
-package udp
+package server
 
 import (
 	"encoding/json"
@@ -9,10 +9,6 @@ import (
 	"strconv"
 	"sync"
 )
-
-type Server interface {
-	Serve(port string, nodesCount chan int, wg *sync.WaitGroup) error
-}
 
 type udpServer struct {
 	requestsServed  int

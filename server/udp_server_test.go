@@ -1,30 +1,31 @@
-package udp
+package server
 
 import (
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/suite"
+	"node_topology_discovery/client"
 	"node_topology_discovery/mocks"
 	"node_topology_discovery/model"
 	"sync"
 	"testing"
 )
 
-type UdpClientServerTestSuite struct {
+type UdpServerTestSuite struct {
 	suite.Suite
 	mockCtrl         *gomock.Controller
 	discoveryService *mocks.MockNodesDiscoveryService
 }
 
 func TestUdpServerTestSuite(t *testing.T) {
-	suite.Run(t, new(UdpClientServerTestSuite))
+	suite.Run(t, new(UdpServerTestSuite))
 }
 
-func (suite *UdpClientServerTestSuite) SetupTest() {
+func (suite *UdpServerTestSuite) SetupTest() {
 	suite.mockCtrl = gomock.NewController(suite.T())
 	suite.discoveryService = mocks.NewMockNodesDiscoveryService(suite.mockCtrl)
 }
 
-func (suite UdpClientServerTestSuite) TestShouldServeOneRequestAndStopTheServerWhenNodesCountIsTwo() {
+func (suite UdpServerTestSuite) TestShouldServeOneRequestAndStopTheServerWhenNodesCountIsTwo() {
 	nodesCount := make(chan int, 1)
 	nodesCount <- 2
 	var wg sync.WaitGroup
@@ -33,7 +34,7 @@ func (suite UdpClientServerTestSuite) TestShouldServeOneRequestAndStopTheServerW
 	server := NewUdpServer(suite.discoveryService)
 	port := "30001"
 	go server.Serve(port, nodesCount, &wg)
-	client := NewUdpClient(5, "localhost", port)
+	client := client.NewUdpClient(5, "localhost", port)
 	request := model.NodesDiscoveryRequest{
 		VisitedNodes: []string{"localhost:30001"},
 		DebugTrace:   "machine-1",
@@ -58,7 +59,7 @@ func (suite UdpClientServerTestSuite) TestShouldServeOneRequestAndStopTheServerW
 	suite.Equal(expectedResponse, response)
 }
 
-func (suite UdpClientServerTestSuite) TestShouldServeTwoRequestsAndStopTheServerWhenNodesCountIsThree() {
+func (suite UdpServerTestSuite) TestShouldServeTwoRequestsAndStopTheServerWhenNodesCountIsThree() {
 	nodesCount := make(chan int, 1)
 	nodesCount <- 3
 	var wg sync.WaitGroup
@@ -67,7 +68,7 @@ func (suite UdpClientServerTestSuite) TestShouldServeTwoRequestsAndStopTheServer
 	server := NewUdpServer(suite.discoveryService)
 	port := "30002"
 	go server.Serve(port, nodesCount, &wg)
-	client := NewUdpClient(500, "localhost", port)
+	client := client.NewUdpClient(500, "localhost", port)
 
 	request1 := model.NodesDiscoveryRequest{
 		VisitedNodes: []string{"localhost:30001"},

@@ -1,4 +1,4 @@
-package udp
+package client
 
 import (
 	"bufio"
@@ -8,10 +8,6 @@ import (
 	"node_topology_discovery/model"
 	"time"
 )
-
-type Client interface {
-	MakeRequest(request model.NodesDiscoveryRequest) (model.NodesDiscoveryResponse, error)
-}
 
 type udpClient struct {
 	timeoutInSeconds time.Duration
@@ -30,7 +26,8 @@ func NewUdpClient(timeoutInSeconds time.Duration, ipAddress, port string) Client
 func (udpClient udpClient) MakeRequest(request model.NodesDiscoveryRequest) (model.NodesDiscoveryResponse, error) {
 	addressString := udpClient.ipAddress + ":" + udpClient.port
 	fmt.Println("Dialing udp..")
-	udpConnection, err := net.Dial("udp", addressString)
+	dialer := net.Dialer{Timeout: udpClient.timeoutInSeconds * time.Second}
+	udpConnection, err := dialer.Dial("udp", addressString)
 
 	if err != nil {
 		fmt.Println(err)
@@ -48,7 +45,7 @@ func (udpClient udpClient) MakeRequest(request model.NodesDiscoveryRequest) (mod
 	fmt.Println("Write successful!")
 
 	responseBytes := make([]byte, 2048)
-	
+
 	fmt.Println("Reading response from udp server... ")
 	readLen, err := bufio.NewReader(udpConnection).Read(responseBytes)
 	if err != nil {

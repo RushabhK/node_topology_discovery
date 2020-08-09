@@ -1,6 +1,7 @@
 package service
 
 import (
+	"node_topology_discovery/client"
 	"node_topology_discovery/config_loader"
 	"node_topology_discovery/model"
 )
@@ -11,6 +12,7 @@ type NodesDiscoveryService interface {
 
 type nodesDiscoveryService struct {
 	configData config_loader.ConfigData
+	udpClient  client.Client
 }
 
 func NewNodesDiscoveryService(configData config_loader.ConfigData) NodesDiscoveryService {

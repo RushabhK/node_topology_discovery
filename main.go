@@ -5,8 +5,8 @@ import (
 	"node_topology_discovery/config_loader"
 	"node_topology_discovery/constants"
 	"node_topology_discovery/model"
+	"node_topology_discovery/server"
 	"node_topology_discovery/service"
-	"node_topology_discovery/udp"
 	"sync"
 )
 
@@ -19,7 +19,7 @@ func main() {
 	}
 
 	discoveryService := service.NewNodesDiscoveryService(configData)
-	server := udp.NewUdpServer(discoveryService)
+	server := server.NewUdpServer(discoveryService)
 
 	var wg sync.WaitGroup
 	wg.Add(1)
