@@ -13,12 +13,6 @@ type udpClient struct {
 	timeoutInSeconds time.Duration
 }
 
-func NewUdpClient(timeoutInSeconds time.Duration) Client {
-	return udpClient{
-		timeoutInSeconds: timeoutInSeconds,
-	}
-}
-
 func (udpClient udpClient) MakeRequest(ipAddress string, port string, request model.NodesDiscoveryRequest) (model.NodesDiscoveryResponse, error) {
 	addressString := ipAddress + ":" + port
 	fmt.Println("Dialing udp..")

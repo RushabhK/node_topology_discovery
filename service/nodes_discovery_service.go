@@ -15,10 +15,10 @@ type nodesDiscoveryService struct {
 	client     client.Client
 }
 
-func NewNodesDiscoveryService(configData config_loader.ConfigData, client client.Client) NodesDiscoveryService {
+func NewNodesDiscoveryService(configData config_loader.ConfigData, clientFactory client.ClientFactory) NodesDiscoveryService {
 	return nodesDiscoveryService{
 		configData: configData,
-		client:     client,
+		client:     clientFactory.GetClient(),
 	}
 }
 

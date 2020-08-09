@@ -19,7 +19,7 @@ func main() {
 		panic("Cannot load config: " + loadError.Error())
 	}
 
-	udpClient := client.NewUdpClient(constants.CLIENT_DIAL_TIMEOUT)
+	udpClient := client.NewUdpClientFactory(constants.CLIENT_DIAL_TIMEOUT)
 	discoveryService := service.NewNodesDiscoveryService(configData, udpClient)
 	server := server.NewUdpServer(discoveryService)
 

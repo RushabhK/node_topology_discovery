@@ -34,7 +34,7 @@ func (suite UdpServerTestSuite) TestShouldServeOneRequestAndStopTheServerWhenNod
 	server := NewUdpServer(suite.discoveryService)
 	port := "30001"
 	go server.Serve(port, nodesCount, &wg)
-	client := client.NewUdpClient(5)
+	client := client.NewUdpClientFactory(5).GetClient()
 	request := model.NodesDiscoveryRequest{
 		VisitedNodes: []string{"localhost:30001"},
 		DebugTrace:   "machine-1",
@@ -68,7 +68,7 @@ func (suite UdpServerTestSuite) TestShouldServeTwoRequestsAndStopTheServerWhenNo
 	server := NewUdpServer(suite.discoveryService)
 	port := "30002"
 	go server.Serve(port, nodesCount, &wg)
-	client := client.NewUdpClient(5)
+	client := client.NewUdpClientFactory(5).GetClient()
 
 	request1 := model.NodesDiscoveryRequest{
 		VisitedNodes: []string{"localhost:30001"},
