@@ -18,6 +18,10 @@ func (nodeInfo NodeInfo) GetIdentifier() string {
 	return nodeInfo.IpAddress + ":" + nodeInfo.Port
 }
 
+func (neighborInfo NeighborInfo) GetIdentifier() string {
+	return neighborInfo.IpAddress + ":" + neighborInfo.Port
+}
+
 type NodesDiscoveryResponse map[string]NodeInfo
 
 func (response NodesDiscoveryResponse) ToString() string {

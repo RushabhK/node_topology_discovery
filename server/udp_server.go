@@ -41,11 +41,13 @@ func (server udpServer) Serve(port string, nodesCount chan int, wg *sync.WaitGro
 	requestBytes := make([]byte, 2048)
 
 	for {
+		fmt.Println("Total nodes count detected by server: ", server.totalNodesCount)
+		fmt.Println("Total requests served by server: ", server.requestsServed)
 		if len(nodesCount) > 0 {
 			server.totalNodesCount = <-nodesCount
 			fmt.Println("Total nodes in the topology : ", server.totalNodesCount)
 		}
-		if server.totalNodesCount != 0 && server.requestsServed == server.totalNodesCount-1 {
+		if server.totalNodesCount != 0 && server.requestsServed >= server.totalNodesCount-1 {
 			fmt.Println("Processing of the server is completed.")
 			return nil
 		}

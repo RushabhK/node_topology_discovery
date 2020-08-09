@@ -1,14 +1,15 @@
 package main
 
 import (
-	"fmt"
 	"node_topology_discovery/client"
 	"node_topology_discovery/config_loader"
 	"node_topology_discovery/constants"
-	"node_topology_discovery/model"
+	"node_topology_discovery/result_generator"
 	"node_topology_discovery/server"
 	"node_topology_discovery/service"
+	"node_topology_discovery/utils"
 	"sync"
+	"time"
 )
 
 func main() {
@@ -22,23 +23,17 @@ func main() {
 	udpClient := client.NewUdpClientFactory(constants.CLIENT_DIAL_TIMEOUT)
 	discoveryService := service.NewNodesDiscoveryService(configData, udpClient)
 	server := server.NewUdpServer(discoveryService)
+	fileUtils := utils.NewFileUtils()
+	resultGenerator := result_generator.NewResultGenerator(discoveryService, fileUtils)
 
 	var wg sync.WaitGroup
-	wg.Add(1)
+	wg.Add(2)
 	nodesCount := make(chan int, 1)
 
 	go server.Serve(configData.Port, nodesCount, &wg)
+	time.Sleep(constants.INITIAL_WAIT_IN_SEC * time.Second)
+	go resultGenerator.Generate(nodesCount, &wg)
 
-	discoveryRequest := model.NodesDiscoveryRequest{
-		DebugTrace:   configData.Name,
-		VisitedNodes: []string{configData.GetIdentifier()},
-	}
-	discoveryResponse, discoveryError := discoveryService.Discover(discoveryRequest)
-	if discoveryError != nil {
-		fmt.Println("Error while discovering: ", discoveryError.Error())
-		nodesCount <- 1
-	}
-	nodesCount <- len(discoveryResponse)
 	wg.Wait()
 }
 
