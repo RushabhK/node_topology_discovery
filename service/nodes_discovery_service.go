@@ -19,6 +19,8 @@ func NewNodesDiscoveryService(configData config_loader.ConfigData) NodesDiscover
 	}
 }
 
-func (nodesDiscoveryService) Discover(request model.NodesDiscoveryRequest) (model.NodesDiscoveryResponse, error) {
-	panic("implement me")
+func (service nodesDiscoveryService) Discover(request model.NodesDiscoveryRequest) (model.NodesDiscoveryResponse, error) {
+	response := model.NodesDiscoveryResponse{}
+	response[service.configData.GetIdentifier()] = service.configData.ToNodeInfo()
+	panic("")
 }

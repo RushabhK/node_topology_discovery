@@ -6,7 +6,7 @@ import (
 	"node_topology_discovery/constants"
 	"node_topology_discovery/model"
 	"node_topology_discovery/service"
-	"node_topology_discovery/tcp"
+	"node_topology_discovery/udp"
 	"sync"
 )
 
@@ -19,13 +19,13 @@ func main() {
 	}
 
 	discoveryService := service.NewNodesDiscoveryService(configData)
-	tcpServer := tcp.NewTcpServer(discoveryService)
+	server := udp.NewUdpServer(discoveryService)
 
 	var wg sync.WaitGroup
 	wg.Add(1)
 	nodesCount := make(chan int, 1)
 
-	go tcpServer.Serve(configData.Port, nodesCount, &wg)
+	go server.Serve(configData.Port, nodesCount, &wg)
 
 	discoveryRequest := model.NodesDiscoveryRequest{
 		DebugTrace:   configData.Name,
