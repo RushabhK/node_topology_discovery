@@ -13,7 +13,7 @@ import (
 )
 
 type ResultGenerator interface {
-	Generate(nodesCount chan int, wg *sync.WaitGroup) error
+	Generate(nodesCount chan int, wg *sync.WaitGroup, machineName string) error
 }
 
 type resultGenerator struct {
@@ -28,7 +28,7 @@ func NewResultGenerator(service service.NodesDiscoveryService, fileUtils utils.F
 	}
 }
 
-func (resultGenerator resultGenerator) Generate(nodesCount chan int, wg *sync.WaitGroup) error {
+func (resultGenerator resultGenerator) Generate(nodesCount chan int, wg *sync.WaitGroup, machineName string) error {
 	defer func() {
 		wg.Done()
 	}()
@@ -39,7 +39,8 @@ func (resultGenerator resultGenerator) Generate(nodesCount chan int, wg *sync.Wa
 	defer func() {
 		fmt.Println("FINAL RESULT: ", finalResult)
 		fmt.Println("EXECUTION TIME: ", executionTime)
-		fileContent := finalResult + "\n\nEXECUTION TIME: " + fmt.Sprintf("%f seconds\n", executionTime)
+		executionTimeFormat := fmt.Sprintf("Total time taken for discovery for machine %s: %f seconds\n", machineName, executionTime)
+		fileContent := finalResult + "\n" + executionTimeFormat
 		resultGenerator.fileUtils.Write(constants.RESULT_FILE_PATH, fileContent)
 	}()
 
@@ -50,10 +51,9 @@ func (resultGenerator resultGenerator) Generate(nodesCount chan int, wg *sync.Wa
 	executionTime = elapsed.Seconds()
 
 	if err != nil {
-		fmt.Println("Error encountered while discovering")
+		fmt.Println("Error encountered while discovering:", err.Error())
 		fmt.Println("Writing to NODES_COUNT CHANNEL value : 1")
 		nodesCount <- 1
-		finalResult = err.Error()
 		return err
 	}
 
@@ -72,14 +72,14 @@ func (resultGenerator resultGenerator) Generate(nodesCount chan int, wg *sync.Wa
 		sort.Strings(resultMap[machine])
 	}
 
-	finalResult = formatContent(resultMap, executionTime)
+	finalResult = formatContent(resultMap, machineName)
 	fmt.Println("Writing to NODES_COUNT CHANNEL value : ", len(resultMap))
 	nodesCount <- len(resultMap)
 	return nil
 }
 
-func formatContent(resultMap map[string][]string, executionTime float64) string {
-	result := "FINAL RESULT:\n"
+func formatContent(resultMap map[string][]string, machineName string) string {
+	result := fmt.Sprintf("There are %v machines in this topology. The following are the machines and their neighbors discovered from machine %s:\n", len(resultMap), machineName)
 	keys := make([]string, 0, len(resultMap))
 	for k := range resultMap {
 		keys = append(keys, k)

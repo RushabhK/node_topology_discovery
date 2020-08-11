@@ -32,7 +32,7 @@ func main() {
 
 	go server.Serve(configData.Port, nodesCount, &wg)
 	time.Sleep(constants.INITIAL_WAIT_IN_SEC * time.Second)
-	go resultGenerator.Generate(nodesCount, &wg)
+	go resultGenerator.Generate(nodesCount, &wg, configData.Name)
 
 	wg.Wait()
 }

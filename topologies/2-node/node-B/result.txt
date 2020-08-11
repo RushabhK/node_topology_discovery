@@ -1,6 +1,5 @@
-FINAL RESULT:
+There are 2 machines in this topology. The following are the machines and their neighbors discovered from machine B:
 A: [B]
 B: [A]
 
-
-EXECUTION TIME: 0.028417 seconds
+Total time taken for discovery for machine B: 0.005387 seconds
