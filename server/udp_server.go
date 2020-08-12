@@ -3,7 +3,9 @@ package server
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/google/uuid"
 	"net"
+	"node_topology_discovery/constants"
 	"node_topology_discovery/model"
 	"node_topology_discovery/service"
 	"strconv"
@@ -25,13 +27,14 @@ func NewUdpServer(discoveryService service.NodesDiscoveryService) Server {
 }
 
 type udpPayload struct {
+	uuid          string
 	data          []byte
 	remoteAddress *net.UDPAddr
 }
 
 func readFromUdp(conn *net.UDPConn, readChan chan udpPayload) error {
-	requestBytes := make([]byte, 2048)
 	for {
+		requestBytes := make([]byte, constants.BUFFER_SIZE)
 		fmt.Println("Reading request from the client")
 		if conn == nil {
 			return nil
@@ -41,9 +44,14 @@ func readFromUdp(conn *net.UDPConn, readChan chan udpPayload) error {
 			fmt.Println("Error while reading the request : ", err.Error())
 			return err
 		}
+		u1, _ := uuid.NewUUID()
+		uuid := fmt.Sprintf("%s", u1)
 		fmt.Println("Request from client: ", string(requestBytes))
+		fmt.Println("Writing to the channel: ", string(requestBytes[0:readLen]))
+		fmt.Println("Length of request in channel: ", readLen)
+		fmt.Println("UUID of request in channel: ", uuid)
 		fmt.Println("Remote address: ", remoteaddr)
-		readChan <- udpPayload{data: requestBytes[0:readLen], remoteAddress: remoteaddr}
+		readChan <- udpPayload{uuid: uuid, data: requestBytes[0:readLen], remoteAddress: remoteaddr}
 	}
 }
 
@@ -61,7 +69,7 @@ func (server udpServer) Serve(port string, nodesCountChan chan int, wg *sync.Wai
 		fmt.Println("Error while listening : ", listenError.Error())
 		serveError = listenError
 	}
-	udpPayloadChan := make(chan udpPayload, 1000)
+	udpPayloadChan := make(chan udpPayload, 2 * constants.BUFFER_SIZE)
 	go readFromUdp(udpServer, udpPayloadChan)
 
 	for {
@@ -81,11 +89,12 @@ func (server udpServer) Serve(port string, nodesCountChan chan int, wg *sync.Wai
 			}
 		case udpPayload := <-udpPayloadChan:
 			{
-				fmt.Println("Unmarshalling the request..")
+				fmt.Println("Unmarshalling the request..", string(udpPayload.data))
+				fmt.Println("UUID of message..", udpPayload.uuid)
 				var request model.NodesDiscoveryRequest
 				unmarshalErr := json.Unmarshal(udpPayload.data, &request)
 				if unmarshalErr != nil {
-					println("Unmarshalling error : ", unmarshalErr.Error())
+					fmt.Println("Unmarshalling error : ", unmarshalErr.Error())
 					serveError = unmarshalErr
 					return
 				}
@@ -102,6 +111,7 @@ func (server udpServer) Serve(port string, nodesCountChan chan int, wg *sync.Wai
 					}
 					server.requestsServed += 1
 					responseString := discoveryResponse.ToString() + "\n"
+					fmt.Println("SIZE OF RESPONSE :", len([]byte(responseString)))
 					fmt.Println("Response from discovery : ", responseString)
 					fmt.Println("Writing the discovery response..")
 					_, writeError := udpServer.WriteToUDP([]byte(responseString), udpPayload.remoteAddress)

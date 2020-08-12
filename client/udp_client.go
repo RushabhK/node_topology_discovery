@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net"
+	"node_topology_discovery/constants"
 	"node_topology_discovery/model"
 	"time"
 )
@@ -20,7 +21,7 @@ func (udpClient udpClient) MakeRequest(ipAddress string, port string, request mo
 	udpConnection, err := dialer.Dial("udp", addressString)
 
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("Error while dialing: ", err.Error())
 		return model.NodesDiscoveryResponse{}, err
 	}
 	defer udpConnection.Close()
@@ -34,7 +35,7 @@ func (udpClient udpClient) MakeRequest(ipAddress string, port string, request mo
 	}
 	fmt.Println("Write successful!")
 
-	responseBytes := make([]byte, 2048)
+	responseBytes := make([]byte, constants.BUFFER_SIZE)
 
 	fmt.Println("Reading response from udp server... ")
 	readLen, err := bufio.NewReader(udpConnection).Read(responseBytes)
