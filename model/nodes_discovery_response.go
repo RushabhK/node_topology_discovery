@@ -3,15 +3,15 @@ package model
 import "encoding/json"
 
 type NodeInfo struct {
-	Name      string `json:"name"`
-	IpAddress string `json:"ip_address"`
-	Port      string `json:"port"`
-	Neighbors []NeighborInfo
+	Name      string `json:"n"`
+	IpAddress string `json:"i"`
+	Port      string `json:"p"`
+	Neighbors []NeighborInfo `json:"N"`
 }
 
 type NeighborInfo struct {
-	IpAddress string `json:"ip_address"`
-	Port      string `json:"port"`
+	IpAddress string `json:"i"`
+	Port      string `json:"p"`
 }
 
 func (nodeInfo NodeInfo) GetIdentifier() string {

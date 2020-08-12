@@ -42,11 +42,9 @@ func (suite NodesDiscoveryServiceTestSuite) TestShouldDiscoverAllNodesAndGiveAgg
 	discoveryService := NewNodesDiscoveryService(configData, suite.clientFactory)
 	request := model.NodesDiscoveryRequest{
 		VisitedNodes: []string{"localhost:3201"},
-		DebugTrace:   "machine-1 -> ",
 	}
 	request3 := model.NodesDiscoveryRequest{
 		VisitedNodes: []string{"localhost:3201", "localhost:3202"},
-		DebugTrace:   "machine-1 -> machine-2 -> ",
 	}
 	response3 := model.NodesDiscoveryResponse{
 		"localhost:3203": model.NodeInfo{
@@ -60,7 +58,6 @@ func (suite NodesDiscoveryServiceTestSuite) TestShouldDiscoverAllNodesAndGiveAgg
 
 	request4 := model.NodesDiscoveryRequest{
 		VisitedNodes: []string{"localhost:3201", "localhost:3202", "localhost:3203"},
-		DebugTrace:   "machine-1 -> machine-2 -> ",
 	}
 	response4 := model.NodesDiscoveryResponse{
 		"localhost:3204": model.NodeInfo{
@@ -116,7 +113,6 @@ func (suite NodesDiscoveryServiceTestSuite) TestShouldNotDiscoverNodesIfAlreadyV
 	discoveryService := NewNodesDiscoveryService(configData, suite.clientFactory)
 	request := model.NodesDiscoveryRequest{
 		VisitedNodes: []string{"localhost:3201", "localhost:3203", "localhost:3204"},
-		DebugTrace:   "machine-1 -> ",
 	}
 
 	response, discoverErr := discoveryService.Discover(request)
@@ -151,12 +147,10 @@ func (suite NodesDiscoveryServiceTestSuite) TestShouldReturnErrorIfDiscoveryOnAn
 	discoveryService := NewNodesDiscoveryService(configData, suite.clientFactory)
 	request := model.NodesDiscoveryRequest{
 		VisitedNodes: []string{"localhost:3201"},
-		DebugTrace:   "machine-1 -> ",
 	}
 
 	request3 := model.NodesDiscoveryRequest{
 		VisitedNodes: []string{"localhost:3201", "localhost:3202"},
-		DebugTrace:   "machine-1 -> machine-2 -> ",
 	}
 	err := errors.New("Discovery failed on localhost:3203")
 	suite.client.EXPECT().MakeRequest("localhost", "3203", request3).Return(model.NodesDiscoveryResponse{}, err)

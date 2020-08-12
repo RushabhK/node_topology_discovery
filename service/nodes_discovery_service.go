@@ -24,7 +24,7 @@ func NewNodesDiscoveryService(configData config_loader.ConfigData, clientFactory
 }
 
 func (service nodesDiscoveryService) Discover(request model.NodesDiscoveryRequest) (model.NodesDiscoveryResponse, error) {
-	request.DebugTrace += service.configData.Name + " -> "
+	//request.DebugTrace += service.configData.Name + " -> "
 	fmt.Println("Discovering the machines in path: ", request.DebugTrace)
 	aggregatedResponse := model.NodesDiscoveryResponse{}
 	aggregatedResponse[service.configData.GetIdentifier()] = service.configData.ToNodeInfo()
