@@ -1,0 +1,36 @@
+There are 4 machines in this topology. The following are the machines and their neighbors discovered from machine A:
+A: [B, C, D]
+B: [A, C, D]
+C: [A, B, D]
+D: [A, B, C]
+
+Total time taken for discovery for machine A: 0.006073 seconds
+______________________________________________________________________________________________________
+
+There are 4 machines in this topology. The following are the machines and their neighbors discovered from machine B:
+A: [B, C, D]
+B: [A, C, D]
+C: [A, B, D]
+D: [A, B, C]
+
+Total time taken for discovery for machine B: 0.005846 seconds
+______________________________________________________________________________________________________
+
+There are 4 machines in this topology. The following are the machines and their neighbors discovered from machine C:
+A: [B, C, D]
+B: [A, C, D]
+C: [A, B, D]
+D: [A, B, C]
+
+Total time taken for discovery for machine C: 0.009048 seconds
+______________________________________________________________________________________________________
+
+There are 4 machines in this topology. The following are the machines and their neighbors discovered from machine D:
+A: [B, C, D]
+B: [A, C, D]
+C: [A, B, D]
+D: [A, B, C]
+
+Total time taken for discovery for machine D: 0.034944 seconds
+______________________________________________________________________________________________________
+

@@ -1,0 +1,150 @@
+There are 10 machines in this topology. The following are the machines and their neighbors discovered from machine M-1:
+M-1: [M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-10: [M-1, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-2: [M-1, M-10, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-3: [M-1, M-10, M-2, M-4, M-5, M-6, M-7, M-8, M-9]
+M-4: [M-1, M-10, M-2, M-3, M-5, M-6, M-7, M-8, M-9]
+M-5: [M-1, M-10, M-2, M-3, M-4, M-6, M-7, M-8, M-9]
+M-6: [M-1, M-10, M-2, M-3, M-4, M-5, M-7, M-8, M-9]
+M-7: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-8, M-9]
+M-8: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-9]
+M-9: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8]
+
+Total time taken for discovery for machine M-1: 0.172164 seconds
+______________________________________________________________________________________________________
+
+There are 10 machines in this topology. The following are the machines and their neighbors discovered from machine M-2:
+M-1: [M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-10: [M-1, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-2: [M-1, M-10, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-3: [M-1, M-10, M-2, M-4, M-5, M-6, M-7, M-8, M-9]
+M-4: [M-1, M-10, M-2, M-3, M-5, M-6, M-7, M-8, M-9]
+M-5: [M-1, M-10, M-2, M-3, M-4, M-6, M-7, M-8, M-9]
+M-6: [M-1, M-10, M-2, M-3, M-4, M-5, M-7, M-8, M-9]
+M-7: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-8, M-9]
+M-8: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-9]
+M-9: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8]
+
+Total time taken for discovery for machine M-2: 0.050420 seconds
+______________________________________________________________________________________________________
+
+There are 10 machines in this topology. The following are the machines and their neighbors discovered from machine M-3:
+M-1: [M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-10: [M-1, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-2: [M-1, M-10, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-3: [M-1, M-10, M-2, M-4, M-5, M-6, M-7, M-8, M-9]
+M-4: [M-1, M-10, M-2, M-3, M-5, M-6, M-7, M-8, M-9]
+M-5: [M-1, M-10, M-2, M-3, M-4, M-6, M-7, M-8, M-9]
+M-6: [M-1, M-10, M-2, M-3, M-4, M-5, M-7, M-8, M-9]
+M-7: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-8, M-9]
+M-8: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-9]
+M-9: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8]
+
+Total time taken for discovery for machine M-3: 0.051834 seconds
+______________________________________________________________________________________________________
+
+There are 10 machines in this topology. The following are the machines and their neighbors discovered from machine M-4:
+M-1: [M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-10: [M-1, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-2: [M-1, M-10, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-3: [M-1, M-10, M-2, M-4, M-5, M-6, M-7, M-8, M-9]
+M-4: [M-1, M-10, M-2, M-3, M-5, M-6, M-7, M-8, M-9]
+M-5: [M-1, M-10, M-2, M-3, M-4, M-6, M-7, M-8, M-9]
+M-6: [M-1, M-10, M-2, M-3, M-4, M-5, M-7, M-8, M-9]
+M-7: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-8, M-9]
+M-8: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-9]
+M-9: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8]
+
+Total time taken for discovery for machine M-4: 0.036424 seconds
+______________________________________________________________________________________________________
+
+There are 10 machines in this topology. The following are the machines and their neighbors discovered from machine M-5:
+M-1: [M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-10: [M-1, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-2: [M-1, M-10, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-3: [M-1, M-10, M-2, M-4, M-5, M-6, M-7, M-8, M-9]
+M-4: [M-1, M-10, M-2, M-3, M-5, M-6, M-7, M-8, M-9]
+M-5: [M-1, M-10, M-2, M-3, M-4, M-6, M-7, M-8, M-9]
+M-6: [M-1, M-10, M-2, M-3, M-4, M-5, M-7, M-8, M-9]
+M-7: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-8, M-9]
+M-8: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-9]
+M-9: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8]
+
+Total time taken for discovery for machine M-5: 0.029403 seconds
+______________________________________________________________________________________________________
+
+There are 10 machines in this topology. The following are the machines and their neighbors discovered from machine M-6:
+M-1: [M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-10: [M-1, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-2: [M-1, M-10, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-3: [M-1, M-10, M-2, M-4, M-5, M-6, M-7, M-8, M-9]
+M-4: [M-1, M-10, M-2, M-3, M-5, M-6, M-7, M-8, M-9]
+M-5: [M-1, M-10, M-2, M-3, M-4, M-6, M-7, M-8, M-9]
+M-6: [M-1, M-10, M-2, M-3, M-4, M-5, M-7, M-8, M-9]
+M-7: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-8, M-9]
+M-8: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-9]
+M-9: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8]
+
+Total time taken for discovery for machine M-6: 0.042651 seconds
+______________________________________________________________________________________________________
+
+There are 10 machines in this topology. The following are the machines and their neighbors discovered from machine M-7:
+M-1: [M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-10: [M-1, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-2: [M-1, M-10, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-3: [M-1, M-10, M-2, M-4, M-5, M-6, M-7, M-8, M-9]
+M-4: [M-1, M-10, M-2, M-3, M-5, M-6, M-7, M-8, M-9]
+M-5: [M-1, M-10, M-2, M-3, M-4, M-6, M-7, M-8, M-9]
+M-6: [M-1, M-10, M-2, M-3, M-4, M-5, M-7, M-8, M-9]
+M-7: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-8, M-9]
+M-8: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-9]
+M-9: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8]
+
+Total time taken for discovery for machine M-7: 0.031884 seconds
+______________________________________________________________________________________________________
+
+There are 10 machines in this topology. The following are the machines and their neighbors discovered from machine M-8:
+M-1: [M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-10: [M-1, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-2: [M-1, M-10, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-3: [M-1, M-10, M-2, M-4, M-5, M-6, M-7, M-8, M-9]
+M-4: [M-1, M-10, M-2, M-3, M-5, M-6, M-7, M-8, M-9]
+M-5: [M-1, M-10, M-2, M-3, M-4, M-6, M-7, M-8, M-9]
+M-6: [M-1, M-10, M-2, M-3, M-4, M-5, M-7, M-8, M-9]
+M-7: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-8, M-9]
+M-8: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-9]
+M-9: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8]
+
+Total time taken for discovery for machine M-8: 0.032600 seconds
+______________________________________________________________________________________________________
+
+There are 10 machines in this topology. The following are the machines and their neighbors discovered from machine M-9:
+M-1: [M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-10: [M-1, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-2: [M-1, M-10, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-3: [M-1, M-10, M-2, M-4, M-5, M-6, M-7, M-8, M-9]
+M-4: [M-1, M-10, M-2, M-3, M-5, M-6, M-7, M-8, M-9]
+M-5: [M-1, M-10, M-2, M-3, M-4, M-6, M-7, M-8, M-9]
+M-6: [M-1, M-10, M-2, M-3, M-4, M-5, M-7, M-8, M-9]
+M-7: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-8, M-9]
+M-8: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-9]
+M-9: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8]
+
+Total time taken for discovery for machine M-9: 0.033051 seconds
+______________________________________________________________________________________________________
+
+There are 10 machines in this topology. The following are the machines and their neighbors discovered from machine M-10:
+M-1: [M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-10: [M-1, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-2: [M-1, M-10, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-3: [M-1, M-10, M-2, M-4, M-5, M-6, M-7, M-8, M-9]
+M-4: [M-1, M-10, M-2, M-3, M-5, M-6, M-7, M-8, M-9]
+M-5: [M-1, M-10, M-2, M-3, M-4, M-6, M-7, M-8, M-9]
+M-6: [M-1, M-10, M-2, M-3, M-4, M-5, M-7, M-8, M-9]
+M-7: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-8, M-9]
+M-8: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-9]
+M-9: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8]
+
+Total time taken for discovery for machine M-10: 0.207276 seconds
+______________________________________________________________________________________________________
+
