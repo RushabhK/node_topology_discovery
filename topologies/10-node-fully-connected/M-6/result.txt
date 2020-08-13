@@ -1,0 +1,13 @@
+There are 10 machines in this topology. The following are the machines and their neighbors discovered from machine M-6:
+M-1: [M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-10: [M-1, M-2, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-2: [M-1, M-10, M-3, M-4, M-5, M-6, M-7, M-8, M-9]
+M-3: [M-1, M-10, M-2, M-4, M-5, M-6, M-7, M-8, M-9]
+M-4: [M-1, M-10, M-2, M-3, M-5, M-6, M-7, M-8, M-9]
+M-5: [M-1, M-10, M-2, M-3, M-4, M-6, M-7, M-8, M-9]
+M-6: [M-1, M-10, M-2, M-3, M-4, M-5, M-7, M-8, M-9]
+M-7: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-8, M-9]
+M-8: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-9]
+M-9: [M-1, M-10, M-2, M-3, M-4, M-5, M-6, M-7, M-8]
+
+Total time taken for discovery for machine M-6: 0.042651 seconds

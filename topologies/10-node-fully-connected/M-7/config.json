@@ -1,0 +1,43 @@
+{
+  "name": "M-7",
+  "ip_address": "localhost",
+  "port": "8407",
+  "neighbors": [
+    {
+      "ip_address": "localhost",
+      "port": "8401"
+    },
+    {
+      "ip_address": "localhost",
+      "port": "8402"
+    },
+    {
+      "ip_address": "localhost",
+      "port": "8403"
+    },
+    {
+      "ip_address": "localhost",
+      "port": "8404"
+    },
+    {
+      "ip_address": "localhost",
+      "port": "8405"
+    },
+    {
+      "ip_address": "localhost",
+      "port": "8406"
+    },
+    {
+      "ip_address": "localhost",
+      "port": "8408"
+    },
+    {
+      "ip_address": "localhost",
+      "port": "8409"
+    },
+    {
+      "ip_address": "localhost",
+      "port": "8410"
+    }
+  ]
+}

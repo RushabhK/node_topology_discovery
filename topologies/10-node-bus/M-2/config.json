@@ -1,0 +1,15 @@
+{
+  "name": "M-2",
+  "ip_address": "localhost",
+  "port": "8302",
+  "neighbors": [
+    {
+      "ip_address": "localhost",
+      "port": "8301"
+    },
+    {
+      "ip_address": "localhost",
+      "port": "8303"
+    }
+  ]
+}
