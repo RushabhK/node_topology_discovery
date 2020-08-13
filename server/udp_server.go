@@ -69,7 +69,7 @@ func (server udpServer) Serve(port string, nodesCountChan chan int, wg *sync.Wai
 		fmt.Println("Error while listening : ", listenError.Error())
 		serveError = listenError
 	}
-	udpPayloadChan := make(chan udpPayload, 2 * constants.BUFFER_SIZE)
+	udpPayloadChan := make(chan udpPayload, constants.CHANNEL_SIZE)
 	go readFromUdp(udpServer, udpPayloadChan)
 
 	for {

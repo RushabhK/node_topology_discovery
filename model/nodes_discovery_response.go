@@ -3,9 +3,9 @@ package model
 import "encoding/json"
 
 type NodeInfo struct {
-	Name      string `json:"n"`
-	IpAddress string `json:"i"`
-	Port      string `json:"p"`
+	Name      string         `json:"n"`
+	IpAddress string         `json:"i"`
+	Port      string         `json:"p"`
 	Neighbors []NeighborInfo `json:"N"`
 }
 
