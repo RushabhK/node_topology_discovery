@@ -32,3 +32,17 @@ Implementation of Network Topology Discovery.
 # Execution Steps
 - make build
 - make start
+
+# Execution guide to run sample topologies
+## For 10-nodes or less topologies
+* Change directory to : _topologies/{topology_name}_
+* Run `python3 setup.py`
+* Based on the number of nodes, open those many shells, each with the current working directory of the respective nodes.
+* Run `./bin/server` from each of the shell, all at once.
+* Change directory to : _topologies/{topology_name}_
+* Run `python3 result_aggregator.py`
+
+## For 100-node-star topology
+* Get inside the topologies/100-node-star directory
+* Run `python3 setup.py`
+* Run `python3 result_aggregator.py`
