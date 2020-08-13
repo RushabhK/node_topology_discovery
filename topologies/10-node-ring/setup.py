@@ -82,7 +82,7 @@ def create_configs(nodes, ports):
 def main():
     nodes = 10
     copy_binaries(nodes)
-    ports = get_free_ports(nodes, 8301)
+    ports = get_free_ports(nodes, 8501)
     print("PORTS:", ports)
     create_configs(nodes, ports)
     # start_servers(nodes)

@@ -5,18 +5,17 @@ import json
 from multiprocessing import Process
 
 
-def get_free_ports(n):
+def get_free_ports(n, start_with):
     ip = gethostbyname("localhost")
     print('Starting scan on host: ', ip)
     open_ports = []
 
-    for i in range(6000, 65535):
+    for i in range(start_with, 65535):
         if len(open_ports) == n:
             return open_ports
         s = socket(AF_INET, SOCK_DGRAM)
 
         conn = s.connect_ex((ip, i))
-        print("socket return code:", conn)
         if conn == 0:
             open_ports.append(i)
         s.close()
@@ -73,7 +72,7 @@ def start_servers(nodes):
 def main():
     nodes = 100
     copy_binaries(nodes)
-    ports = get_free_ports(nodes)
+    ports = get_free_ports(nodes, 6000)
     print("PORTS:", ports)
     create_configs(nodes, ports)
     start_servers(nodes)

@@ -1,1 +1,1 @@
-{"name": "M-1", "ip_address": "localhost", "port": "8301", "neighbors": [{"ip_address": "localhost", "port": "8302"}, {"ip_address": "localhost", "port": "8310"}]}
+{"name": "M-1", "ip_address": "localhost", "port": "8501", "neighbors": [{"ip_address": "localhost", "port": "8502"}, {"ip_address": "localhost", "port": "8510"}]}
